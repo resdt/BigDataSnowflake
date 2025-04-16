@@ -1,0 +1,18 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "db",
+    "workspaceFolder": "/workspace",
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "cweijan.vscode-postgresql-client2",
+                "ms-toolsai.datawrangler",
+                "grapecity.gc-excelviewer",
+                "tamasfe.even-better-toml"
+            ]
+        }
+    }
+}
