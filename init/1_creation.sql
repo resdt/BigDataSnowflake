@@ -1,4 +1,3 @@
--- creation.sql
 -- Dimension Tables
 DROP TABLE IF EXISTS dim_customer CASCADE;
 
@@ -74,20 +73,6 @@ CREATE TABLE dim_supplier (
     country VARCHAR(100)
 );
 
-DROP TABLE IF EXISTS dim_date CASCADE;
-
-CREATE TABLE dim_date (
-    date_id DATE PRIMARY KEY,
-    DAY INTEGER,
-    MONTH INTEGER,
-    YEAR INTEGER,
-    quarter INTEGER,
-    day_of_week INTEGER,
-    day_name VARCHAR(10),
-    month_name VARCHAR(10),
-    is_weekend BOOLEAN
-);
-
 -- Fact Table
 DROP TABLE IF EXISTS fact_sales CASCADE;
 
@@ -98,7 +83,7 @@ CREATE TABLE fact_sales (
     product_id INTEGER REFERENCES dim_product (product_id),
     store_id INTEGER REFERENCES dim_store (store_id),
     supplier_id INTEGER REFERENCES dim_supplier (supplier_id),
-    sale_date DATE REFERENCES dim_date (date_id),
+    sale_date DATE,
     quantity INTEGER,
     total_price DECIMAL(10, 2),
     product_quantity INTEGER
@@ -106,13 +91,8 @@ CREATE TABLE fact_sales (
 
 -- Indexes
 CREATE INDEX idx_fact_sales_customer ON fact_sales (customer_id);
-
 CREATE INDEX idx_fact_sales_product ON fact_sales (product_id);
-
 CREATE INDEX idx_fact_sales_seller ON fact_sales (seller_id);
-
 CREATE INDEX idx_fact_sales_store ON fact_sales (store_id);
-
 CREATE INDEX idx_fact_sales_supplier ON fact_sales (supplier_id);
-
 CREATE INDEX idx_fact_sales_date ON fact_sales (sale_date);
